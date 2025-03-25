@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventMonitorService", "EventMonitorService\EventMonitorService.csproj", "{6D27702A-F10B-46BA-976E-E759660C69D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventMonitorService.Tests", "EventMonitorService.Tests\EventMonitorService.Tests.csproj", "{C2BB89C2-9D67-4156-B0CD-9FEE0BDD1556}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{6D27702A-F10B-46BA-976E-E759660C69D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D27702A-F10B-46BA-976E-E759660C69D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D27702A-F10B-46BA-976E-E759660C69D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2BB89C2-9D67-4156-B0CD-9FEE0BDD1556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2BB89C2-9D67-4156-B0CD-9FEE0BDD1556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2BB89C2-9D67-4156-B0CD-9FEE0BDD1556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2BB89C2-9D67-4156-B0CD-9FEE0BDD1556}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

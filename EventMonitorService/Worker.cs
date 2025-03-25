@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Xml;
 using Microsoft.EntityFrameworkCore;
 
@@ -62,7 +63,8 @@ public class Worker : BackgroundService
             var entry = eventLog.Entries[i];
             
             if (entry.TimeGenerated < retentionDate) continue;
-            var monitorEvent = appConfig.MonitorEventsList.FirstOrDefault(q => q.Application == entry.Source);
+
+            var monitorEvent = appConfig.MonitorEventsList.FirstOrDefault(q => entry.Source != ".NET Runtime" ? q.Application == entry.Source : q.Application == ExtractApplicationName(entry.Message));
             if (monitorEvent == null) continue;
             
             if ((int)entry.EntryType > monitorEvent.Severity) continue;
@@ -78,7 +80,7 @@ public class Worker : BackgroundService
                 Id = entry.Index,
                 Created = entry.TimeGenerated,
                 Message = entry.Message,
-                Source = entry.Source,
+                Source = entry.Source != ".NET Runtime" ? entry.Source : ExtractApplicationName(entry.Message),
                 Severity = entry.EntryType.ToString(),
                 Computer = entry.MachineName
             });
@@ -130,5 +132,24 @@ public class Worker : BackgroundService
         template = template.Replace("{{footer}}", machineName ?? "Look at this cool project.");
         
         await _emailService.SendEmailAsync("Event Monitor Alert", template, cancellationToken);
+    }
+    
+    public static string ExtractApplicationName(string log)
+    {
+        // Match application name from "Application: XYZ.exe"
+        var exeMatch = Regex.Match(log, @"Application:\s+([\w\d]+)\.exe");
+        if (exeMatch.Success)
+        {
+            return exeMatch.Groups[1].Value;
+        }
+
+        // Match category name from "Category: XYZ"
+        var categoryMatch = Regex.Match(log, @"Category:\s+([\w\d\.]+)");
+        if (categoryMatch.Success)
+        {
+            return categoryMatch.Groups[1].Value;
+        }
+
+        return "Unknown";
     }
 }
