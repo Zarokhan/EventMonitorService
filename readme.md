@@ -27,3 +27,7 @@ Severity levels in the configuration file:
 
 ### TODOS
 * Alerts to Microsoft Teams
+
+### Example Email Notification
+![Test image 1](https://github.com/Zarokhan/EventMonitorService/blob/main/img1.jpg?raw=true)
+![Test image 2](https://github.com/Zarokhan/EventMonitorService/blob/main/img2.jpg?raw=true)
