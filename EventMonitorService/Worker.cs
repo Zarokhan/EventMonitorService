@@ -123,7 +123,7 @@ public class Worker : BackgroundService
                 content += $"<p>Date: {entry.Created:g}</p>";
             }
 
-            content += $"<p>Message: \n{entry.Message}</p>";
+            content += $"<p>Message: \n{entry.Message?.Replace("\n", "</br>")}</p>";
         }
 
         var machineName = groups.FirstOrDefault()?.FirstOrDefault()?.Computer;
