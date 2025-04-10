@@ -2,6 +2,10 @@ using EventMonitorService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = Host.CreateApplicationBuilder(args);
+builder.Services.AddWindowsService(options =>
+{
+    options.ServiceName = "EventMonitorService";
+});
 builder.Services.AddHostedService<Worker>();
 builder.Services.AddSingleton<EmailService>();
 
